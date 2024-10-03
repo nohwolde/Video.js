@@ -4,6 +4,7 @@
   "description": "A JavaScript client for YouTube's private API, known as InnerTube.",
   "type": "module",
   "types": "./dist/src/platform/lib.d.ts",
+  "main": "./bundle/react-native.js",
   "typesVersions": {
     "*": {
       "agnostic": [
