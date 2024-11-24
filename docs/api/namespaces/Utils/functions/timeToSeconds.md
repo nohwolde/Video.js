@@ -18,4 +18,4 @@ seconds
 
 ## Defined in
 
-[src/utils/Utils.ts:126](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/utils/Utils.ts#L126)
+[src/utils/Utils.ts:127](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/utils/Utils.ts#L127)

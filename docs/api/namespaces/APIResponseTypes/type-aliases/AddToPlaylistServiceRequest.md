@@ -1,0 +1,27 @@
+[youtubei.js](../../../README.md) / [APIResponseTypes](../README.md) / AddToPlaylistServiceRequest
+
+# Type Alias: AddToPlaylistServiceRequest
+
+> **AddToPlaylistServiceRequest**: `object`
+
+## Type declaration
+
+### excludeWatchLater?
+
+> `optional` **excludeWatchLater**: `boolean`
+
+### params?
+
+> `optional` **params**: `string`
+
+### playlistId?
+
+> `optional` **playlistId**: `string`
+
+### videoIds?
+
+> `optional` **videoIds**: `string`[]
+
+## Defined in
+
+[src/parser/types/CommandEndpoints.ts:55](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/types/CommandEndpoints.ts#L55)
