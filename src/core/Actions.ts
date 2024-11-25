@@ -1,13 +1,14 @@
-import type {
-  IBrowseResponse, IGetNotificationsMenuResponse, INextResponse,
-  IParsedResponse, IPlayerResponse, IRawResponse,
-  IResolveURLResponse, ISearchResponse, IUpdatedMetadataResponse
-} from '../parser/index.js';
-
-import { NavigateAction, Parser } from '../parser/index.js';
+import { Parser, NavigateAction } from '../parser/index.js';
 import { InnertubeError } from '../utils/Utils.js';
 
 import type { Session } from './index.js';
+
+import type {
+  IBrowseResponse, IGetNotificationsMenuResponse,
+  INextResponse, IPlayerResponse, IResolveURLResponse,
+  ISearchResponse, IUpdatedMetadataResponse,
+  IParsedResponse, IRawResponse
+} from '../parser/types/index.js';
 
 export interface ApiResponse {
   success: boolean;
@@ -28,14 +29,14 @@ export type ParsedResponse<T> =
   IParsedResponse;
 
 export default class Actions {
-  public session: Session;
+  session: Session;
 
   constructor(session: Session) {
     this.session = session;
   }
 
   /**
-   * Mimics the Axios API using Fetch's Response object.
+   * Mimmics the Axios API using Fetch's Response object.
    * @param response - The response object.
    */
   async #wrap(response: Response): Promise<ApiResponse> {
@@ -64,7 +65,9 @@ export default class Actions {
       s_url.searchParams.set(key, params[key]);
     }
 
-    return await this.session.http.fetch(s_url);
+    const response = await this.session.http.fetch(s_url);
+
+    return response;
   }
 
   /**

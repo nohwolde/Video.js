@@ -15,18 +15,18 @@ import Alert from '../classes/Alert.js';
 import ContinuationItem from '../classes/ContinuationItem.js';
 import PlaylistVideo from '../classes/PlaylistVideo.js';
 import SectionList from '../classes/SectionList.js';
-import { observe, type ObservedArray, type YTNode } from '../helpers.js';
+import { observe, type ObservedArray } from '../helpers.js';
 
-import type { Actions, ApiResponse } from '../../core/index.js';
-import type { IBrowseResponse } from '../types/index.js';
+import type { ApiResponse, Actions } from '../../core/index.js';
+import type { IBrowseResponse } from '../types/ParsedResponse.js';
 import type Thumbnail from '../classes/misc/Thumbnail.js';
 import type NavigationEndpoint from '../classes/NavigationEndpoint.js';
 
 export default class Playlist extends Feed<IBrowseResponse> {
-  public info;
-  public menu: YTNode;
-  public endpoint?: NavigationEndpoint;
-  public messages: ObservedArray<Message>;
+  info;
+  menu;
+  endpoint?: NavigationEndpoint;
+  messages: ObservedArray<Message>;
 
   constructor(actions: Actions, data: ApiResponse | IBrowseResponse, already_parsed = false) {
     super(actions, data, already_parsed);
@@ -63,6 +63,11 @@ export default class Playlist extends Feed<IBrowseResponse> {
     this.messages = this.memo.getType(Message);
   }
 
+  #getStat(index: number, primary_info?: PlaylistSidebarPrimaryInfo): string {
+    if (!primary_info || !primary_info.stats) return 'N/A';
+    return primary_info.stats[index]?.toString() || 'N/A';
+  }
+
   get items(): ObservedArray<PlaylistVideo | ReelItem | ShortsLockupView> {
     return observe(this.videos.as(PlaylistVideo, ReelItem, ShortsLockupView).filter((video) => (video as PlaylistVideo).style !== 'PLAYLIST_VIDEO_RENDERER_STYLE_RECOMMENDED_VIDEO'));
   }
@@ -92,7 +97,9 @@ export default class Playlist extends Feed<IBrowseResponse> {
     if (!playlist_contents_continuation)
       throw new InnertubeError('There are no continuations.');
 
-    return await playlist_contents_continuation.endpoint.call<IBrowseResponse>(this.actions, { parse: true });
+    const response = await playlist_contents_continuation.endpoint.call<IBrowseResponse>(this.actions, { parse: true });
+
+    return response;
   }
 
   async getContinuation(): Promise<Playlist> {
@@ -100,10 +107,5 @@ export default class Playlist extends Feed<IBrowseResponse> {
     if (!page)
       throw new InnertubeError('Could not get continuation data');
     return new Playlist(this.actions, page, true);
-  }
-
-  #getStat(index: number, primary_info?: PlaylistSidebarPrimaryInfo): string {
-    if (!primary_info || !primary_info.stats) return 'N/A';
-    return primary_info.stats[index]?.toString() || 'N/A';
   }
 }

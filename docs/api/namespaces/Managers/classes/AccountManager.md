@@ -18,9 +18,67 @@
 
 #### Defined in
 
-[src/core/managers/AccountManager.ts:12](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/AccountManager.ts#L12)
+[src/core/managers/AccountManager.ts:22](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/AccountManager.ts#L22)
+
+## Properties
+
+### channel
+
+> **channel**: `object`
+
+#### editDescription()
+
+> **editDescription**: (`new_description`) => `Promise`\<[`ApiResponse`](../../../interfaces/ApiResponse.md)\>
+
+##### Parameters
+
+• **new\_description**: `string`
+
+##### Returns
+
+`Promise`\<[`ApiResponse`](../../../interfaces/ApiResponse.md)\>
+
+#### editName()
+
+> **editName**: (`new_name`) => `Promise`\<[`ApiResponse`](../../../interfaces/ApiResponse.md)\>
+
+##### Parameters
+
+• **new\_name**: `string`
+
+##### Returns
+
+`Promise`\<[`ApiResponse`](../../../interfaces/ApiResponse.md)\>
+
+#### getBasicAnalytics()
+
+> **getBasicAnalytics**: () => `Promise`\<[`Analytics`](../../YT/classes/Analytics.md)\>
+
+##### Returns
+
+`Promise`\<[`Analytics`](../../YT/classes/Analytics.md)\>
+
+#### Defined in
+
+[src/core/managers/AccountManager.ts:16](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/AccountManager.ts#L16)
 
 ## Methods
+
+### getAnalytics()
+
+> **getAnalytics**(): `Promise`\<[`Analytics`](../../YT/classes/Analytics.md)\>
+
+Retrieves basic channel analytics.
+
+#### Returns
+
+`Promise`\<[`Analytics`](../../YT/classes/Analytics.md)\>
+
+#### Defined in
+
+[src/core/managers/AccountManager.ts:107](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/AccountManager.ts#L107)
+
+***
 
 ### getInfo()
 
@@ -34,7 +92,7 @@ Retrieves channel info.
 
 #### Defined in
 
-[src/core/managers/AccountManager.ts:19](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/AccountManager.ts#L19)
+[src/core/managers/AccountManager.ts:66](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/AccountManager.ts#L66)
 
 ***
 
@@ -42,7 +100,7 @@ Retrieves channel info.
 
 > **getSettings**(): `Promise`\<[`Settings`](../../YT/classes/Settings.md)\>
 
-Gets YouTube settings.
+Opens YouTube settings.
 
 #### Returns
 
@@ -50,4 +108,20 @@ Gets YouTube settings.
 
 #### Defined in
 
-[src/core/managers/AccountManager.ts:30](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/AccountManager.ts#L30)
+[src/core/managers/AccountManager.ts:95](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/AccountManager.ts#L95)
+
+***
+
+### getTimeWatched()
+
+> **getTimeWatched**(): `Promise`\<[`TimeWatched`](../../YT/classes/TimeWatched.md)\>
+
+Retrieves time watched statistics.
+
+#### Returns
+
+`Promise`\<[`TimeWatched`](../../YT/classes/TimeWatched.md)\>
+
+#### Defined in
+
+[src/core/managers/AccountManager.ts:81](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/AccountManager.ts#L81)

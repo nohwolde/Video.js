@@ -1,5 +1,6 @@
 import { Constants } from '../../utils/index.js';
 import { InnertubeError, Platform } from '../../utils/Utils.js';
+import { CreateVideoEndpoint } from '../endpoints/upload/index.js';
 
 import type { UpdateVideoMetadataOptions, UploadedVideoMetadataOptions } from '../../types/Misc.js';
 import type { ApiResponse, Session } from '../index.js';
@@ -131,10 +132,12 @@ export default class Studio {
 
     const writer = MetadataUpdateRequest.encode(payload);
 
-    return await this.#session.actions.execute('/video_manager/metadata_update', {
+    const response = await this.#session.actions.execute('/video_manager/metadata_update', {
       protobuf: true,
       serialized_data: writer.finish()
     });
+
+    return response;
   }
 
   /**
@@ -155,7 +158,9 @@ export default class Studio {
     if (upload_result.status !== 'STATUS_SUCCESS')
       throw new InnertubeError('Could not process video.');
 
-    return await this.#setVideoMetadata(initial_data, upload_result, metadata);
+    const response = await this.#setVideoMetadata(initial_data, upload_result, metadata);
+
+    return response;
   }
 
   async #getInitialUploadData(): Promise<InitialUploadData> {
@@ -208,32 +213,39 @@ export default class Studio {
     if (!response.ok)
       throw new InnertubeError('Could not upload video');
 
-    return await response.json();
+    const data = await response.json();
+
+    return data;
   }
 
   async #setVideoMetadata(initial_data: InitialUploadData, upload_result: UploadResult, metadata: UploadedVideoMetadataOptions) {
-    return await this.#session.actions.execute('/upload/createvideo', {
-      resourceId: {
-        scottyResourceId: {
-          id: upload_result.scottyResourceId
-        }
-      },
-      frontendUploadId: initial_data.frontend_upload_id,
-      initialMetadata: {
-        title: {
-          newTitle: metadata.title
+    const response = await this.#session.actions.execute(
+      CreateVideoEndpoint.PATH, CreateVideoEndpoint.build({
+        resource_id: {
+          scotty_resource_id: {
+            id: upload_result.scottyResourceId
+          }
         },
-        description: {
-          newDescription: metadata.description,
-          shouldSegment: true
+        frontend_upload_id: initial_data.frontend_upload_id,
+        initial_metadata: {
+          title: {
+            new_title: metadata.title || new Date().toDateString()
+          },
+          description: {
+            new_description: metadata.description || '',
+            should_segment: true
+          },
+          privacy: {
+            new_privacy: metadata.privacy || 'PRIVATE'
+          },
+          draft_state: {
+            is_draft: metadata.is_draft
+          }
         },
-        privacy: {
-          newPrivacy: metadata.privacy || 'PRIVATE'
-        },
-        draftState: {
-          isDraft: !!metadata.is_draft
-        }
-      }
-    });
+        client: 'ANDROID'
+      })
+    );
+
+    return response;
   }
 }

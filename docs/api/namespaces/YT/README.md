@@ -7,6 +7,7 @@
 ### Classes
 
 - [AccountInfo](classes/AccountInfo.md)
+- [Analytics](classes/Analytics.md)
 - [Channel](classes/Channel.md)
 - [ChannelListContinuation](classes/ChannelListContinuation.md)
 - [Comments](classes/Comments.md)
@@ -23,5 +24,6 @@
 - [Search](classes/Search.md)
 - [Settings](classes/Settings.md)
 - [SmoothedQueue](classes/SmoothedQueue.md)
+- [TimeWatched](classes/TimeWatched.md)
 - [TranscriptInfo](classes/TranscriptInfo.md)
 - [VideoInfo](classes/VideoInfo.md)

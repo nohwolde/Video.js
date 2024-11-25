@@ -21,7 +21,6 @@ export enum ClientType {
   ANDROID = 'ANDROID',
   ANDROID_MUSIC = 'ANDROID_MUSIC',
   ANDROID_CREATOR = 'ANDROID_CREATOR',
-  TV = 'TVHTML5',
   TV_EMBEDDED = 'TVHTML5_SIMPLY_EMBEDDED_PLAYER',
   WEB_EMBEDDED = 'WEB_EMBEDDED_PLAYER',
   WEB_CREATOR = 'WEB_CREATOR'
@@ -213,17 +212,17 @@ const TAG = 'Session';
  * Represents an InnerTube session. This holds all the data needed to make requests to YouTube.
  */
 export default class Session extends EventEmitter {
-  public context: Context;
-  public player?: Player;
-  public oauth: OAuth2;
-  public http: HTTPClient;
-  public logged_in: boolean;
-  public actions: Actions;
-  public cache?: ICache;
-  public key: string;
-  public api_version: string;
-  public account_index: number;
-  public po_token?: string;
+  context: Context;
+  player?: Player;
+  oauth: OAuth2;
+  http: HTTPClient;
+  logged_in: boolean;
+  actions: Actions;
+  cache?: ICache;
+  key: string;
+  api_version: string;
+  account_index: number;
+  po_token?: string;
 
   constructor(context: Context, api_key: string, api_version: string, account_index: number, player?: Player, cookie?: string, fetch?: FetchFunction, cache?: ICache, po_token?: string) {
     super();

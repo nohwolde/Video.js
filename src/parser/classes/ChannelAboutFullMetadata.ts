@@ -1,3 +1,4 @@
+import { Log } from '../../utils/index.js';
 import { YTNode, type ObservedArray } from '../helpers.js';
 import { Parser, type RawNode } from '../index.js';
 import Button from './Button.js';
@@ -47,5 +48,25 @@ export default class ChannelAboutFullMetadata extends YTNode {
     this.can_reveal_email = !data.signInForBusinessEmail;
     this.country = new Text(data.country);
     this.buttons = Parser.parseArray(data.actionButtons, Button);
+  }
+
+  /**
+   * @deprecated
+   * This will be removed in a future release.
+   * Please use {@link ChannelAboutFullMetadata.view_count} instead.
+   */
+  get views() {
+    Log.warnOnce(ChannelAboutFullMetadata.type, 'ChannelAboutFullMetadata#views is deprecated. Please use ChannelAboutFullMetadata#view_count instead.');
+    return this.view_count;
+  }
+
+  /**
+   * @deprecated
+   * This will be removed in a future release.
+   * Please use {@link ChannelAboutFullMetadata.joined_date} instead.
+   */
+  get joined(): Text {
+    Log.warnOnce(ChannelAboutFullMetadata.type, 'ChannelAboutFullMetadata#joined is deprecated. Please use ChannelAboutFullMetadata#joined_date instead.');
+    return this.joined_date;
   }
 }

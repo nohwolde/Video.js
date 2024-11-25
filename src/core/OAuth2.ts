@@ -35,13 +35,13 @@ export type OAuth2AuthErrorEventHandler = (err: OAuth2Error) => void;
 export default class OAuth2 {
   #session: Session;
 
-  public YTTV_URL: URL;
-  public AUTH_SERVER_CODE_URL: URL;
-  public AUTH_SERVER_TOKEN_URL: URL;
-  public AUTH_SERVER_REVOKE_TOKEN_URL: URL;
+  YTTV_URL: URL;
+  AUTH_SERVER_CODE_URL: URL;
+  AUTH_SERVER_TOKEN_URL: URL;
+  AUTH_SERVER_REVOKE_TOKEN_URL: URL;
 
-  public client_id: OAuth2ClientID | undefined;
-  public oauth2_tokens: OAuth2Tokens | undefined;
+  client_id: OAuth2ClientID | undefined;
+  oauth2_tokens: OAuth2Tokens | undefined;
 
   constructor(session: Session) {
     this.#session = session;
@@ -127,7 +127,7 @@ export default class OAuth2 {
     await this.#session.cache?.remove('youtubei_oauth_credentials');
   }
 
-  pollForAccessToken(device_and_user_code: DeviceAndUserCode): void {
+  async pollForAccessToken(device_and_user_code: DeviceAndUserCode): Promise<void> {
     if (!this.client_id)
       throw new OAuth2Error('Client ID is missing.');
 
@@ -317,7 +317,19 @@ export default class OAuth2 {
   }
 
   validateTokens(tokens: OAuth2Tokens): boolean {
-    return !(!tokens.access_token || !tokens.refresh_token || !tokens.expiry_date);
+    const propertiesAreValid = (
+      Boolean(tokens.access_token) &&
+      Boolean(tokens.expiry_date) &&
+      Boolean(tokens.refresh_token)
+    );
+
+    const typesAreValid = (
+      typeof tokens.access_token === 'string' &&
+      typeof tokens.expiry_date === 'string' &&
+      typeof tokens.refresh_token === 'string'
+    );
+
+    return typesAreValid && propertiesAreValid;
   }
 
   get #http() {

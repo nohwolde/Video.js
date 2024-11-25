@@ -7,7 +7,7 @@
 ### Interfaces
 
 - [ObjectInferenceType](interfaces/ObjectInferenceType.md)
-- [PrimitiveInferenceType](interfaces/PrimitiveInferenceType.md)
+- [PrimativeInferenceType](interfaces/PrimativeInferenceType.md)
 - [RendererInferenceType](interfaces/RendererInferenceType.md)
 
 ### Type Aliases

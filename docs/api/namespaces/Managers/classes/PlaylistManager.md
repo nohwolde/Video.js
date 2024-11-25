@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[src/core/managers/PlaylistManager.ts:11](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/PlaylistManager.ts#L11)
+[src/core/managers/PlaylistManager.ts:14](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/PlaylistManager.ts#L14)
 
 ## Methods
 
@@ -52,7 +52,7 @@ An array of video IDs to add to the playlist.
 
 #### Defined in
 
-[src/core/managers/PlaylistManager.ts:74](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/PlaylistManager.ts#L74)
+[src/core/managers/PlaylistManager.ts:73](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/PlaylistManager.ts#L73)
 
 ***
 
@@ -94,7 +94,7 @@ An array of video IDs to add to the playlist.
 
 #### Defined in
 
-[src/core/managers/PlaylistManager.ts:20](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/PlaylistManager.ts#L20)
+[src/core/managers/PlaylistManager.ts:23](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/PlaylistManager.ts#L23)
 
 ***
 
@@ -132,7 +132,7 @@ The playlist ID.
 
 #### Defined in
 
-[src/core/managers/PlaylistManager.ts:47](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/PlaylistManager.ts#L47)
+[src/core/managers/PlaylistManager.ts:48](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/PlaylistManager.ts#L48)
 
 ***
 
@@ -170,7 +170,7 @@ The video ID to move the moved video before.
 
 #### Defined in
 
-[src/core/managers/PlaylistManager.ts:154](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/PlaylistManager.ts#L154)
+[src/core/managers/PlaylistManager.ts:156](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/PlaylistManager.ts#L156)
 
 ***
 
@@ -208,7 +208,7 @@ Option to remove videos using set video IDs.
 
 #### Defined in
 
-[src/core/managers/PlaylistManager.ts:104](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/PlaylistManager.ts#L104)
+[src/core/managers/PlaylistManager.ts:101](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/PlaylistManager.ts#L101)
 
 ***
 
@@ -242,7 +242,7 @@ The description to use for the playlist.
 
 #### Defined in
 
-[src/core/managers/PlaylistManager.ts:243](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/PlaylistManager.ts#L243)
+[src/core/managers/PlaylistManager.ts:239](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/PlaylistManager.ts#L239)
 
 ***
 
@@ -250,7 +250,7 @@ The description to use for the playlist.
 
 > **setName**(`playlist_id`, `name`): `Promise`\<`object`\>
 
-Sets the name for the given playlist.
+Sets the name (title) for the given playlist.
 
 #### Parameters
 
@@ -276,4 +276,4 @@ The name / title to use for the playlist.
 
 #### Defined in
 
-[src/core/managers/PlaylistManager.ts:216](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/managers/PlaylistManager.ts#L216)
+[src/core/managers/PlaylistManager.ts:211](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/managers/PlaylistManager.ts#L211)

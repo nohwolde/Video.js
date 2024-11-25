@@ -26,29 +26,9 @@
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:31](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L31)
+[src/parser/classes/NavigationEndpoint.ts:27](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L27)
 
 ## Properties
-
-### command?
-
-> `optional` **command**: [`YTNode`](../../Helpers/classes/YTNode.md) \| [`YTNode`](../../Helpers/classes/YTNode.md) & [`IEndpoint`](../../APIResponseTypes/interfaces/IEndpoint.md)\<`any`\>
-
-#### Defined in
-
-[src/parser/classes/NavigationEndpoint.ts:28](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L28)
-
-***
-
-### commands?
-
-> `optional` **commands**: [`NavigationEndpoint`](NavigationEndpoint.md)[]
-
-#### Defined in
-
-[src/parser/classes/NavigationEndpoint.ts:29](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L29)
-
-***
 
 ### dialog?
 
@@ -56,17 +36,33 @@
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:23](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L23)
+[src/parser/classes/NavigationEndpoint.ts:14](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L14)
 
 ***
 
 ### metadata
 
-> **metadata**: `Metadata`
+> **metadata**: `object`
+
+#### api\_url?
+
+> `optional` **api\_url**: `string`
+
+#### page\_type?
+
+> `optional` **page\_type**: `string`
+
+#### send\_post?
+
+> `optional` **send\_post**: `boolean`
+
+#### url?
+
+> `optional` **url**: `string`
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:27](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L27)
+[src/parser/classes/NavigationEndpoint.ts:20](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L20)
 
 ***
 
@@ -76,17 +72,7 @@
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:24](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L24)
-
-***
-
-### name?
-
-> `optional` **name**: `string`
-
-#### Defined in
-
-[src/parser/classes/NavigationEndpoint.ts:21](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L21)
+[src/parser/classes/NavigationEndpoint.ts:15](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L15)
 
 ***
 
@@ -96,7 +82,7 @@
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:26](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L26)
+[src/parser/classes/NavigationEndpoint.ts:18](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L18)
 
 ***
 
@@ -106,7 +92,7 @@
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:25](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L25)
+[src/parser/classes/NavigationEndpoint.ts:16](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L16)
 
 ***
 
@@ -116,7 +102,7 @@
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:22](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L22)
+[src/parser/classes/NavigationEndpoint.ts:13](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L13)
 
 ***
 
@@ -130,7 +116,7 @@
 
 #### Defined in
 
-[src/parser/helpers.ts:8](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/helpers.ts#L8)
+[src/parser/helpers.ts:8](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/helpers.ts#L8)
 
 ***
 
@@ -144,7 +130,7 @@
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:19](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L19)
+[src/parser/classes/NavigationEndpoint.ts:11](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L11)
 
 ## Methods
 
@@ -164,17 +150,9 @@ Cast to one of the given types.
 
 • ...**types**: `K`
 
-The types to cast to
-
 #### Returns
 
 `InstanceType`\<`K`\[`number`\]\>
-
-The node cast to one of the given types
-
-#### Throws
-
-If the node is not of the given type
 
 #### Inherited from
 
@@ -182,7 +160,7 @@ If the node is not of the given type
 
 #### Defined in
 
-[src/parser/helpers.ts:38](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/helpers.ts#L38)
+[src/parser/helpers.ts:35](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/helpers.ts#L35)
 
 ***
 
@@ -210,7 +188,7 @@ If the node is not of the given type
 
 ##### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:120](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L120)
+[src/parser/classes/NavigationEndpoint.ts:106](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L106)
 
 #### call(actions, args)
 
@@ -230,13 +208,13 @@ If the node is not of the given type
 
 ##### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:121](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L121)
+[src/parser/classes/NavigationEndpoint.ts:107](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L107)
 
 ***
 
-### ~~getPath()~~
+### getEndpoint()
 
-> **getPath**(`name`): `undefined` \| `"/player"` \| `"/search"` \| `"/browse"` \| `"/next"` \| `"/live_chat/get_item_context_menu"`
+> **getEndpoint**(`name`): `undefined` \| `"/browse"` \| `"/player"` \| `"/search"` \| `"/next"` \| `"/live_chat/get_item_context_menu"`
 
 Sometimes InnerTube does not return an API url, in that case the library should set it based on the name of the payload object.
 
@@ -246,15 +224,11 @@ Sometimes InnerTube does not return an API url, in that case the library should 
 
 #### Returns
 
-`undefined` \| `"/player"` \| `"/search"` \| `"/browse"` \| `"/next"` \| `"/live_chat/get_item_context_menu"`
-
-#### Deprecated
-
-This should be removed in the future.
+`undefined` \| `"/browse"` \| `"/player"` \| `"/search"` \| `"/next"` \| `"/live_chat/get_item_context_menu"`
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:104](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L104)
+[src/parser/classes/NavigationEndpoint.ts:90](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L90)
 
 ***
 
@@ -288,7 +262,7 @@ Whether the node has the key
 
 #### Defined in
 
-[src/parser/helpers.ts:50](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/helpers.ts#L50)
+[src/parser/helpers.ts:47](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/helpers.ts#L47)
 
 ***
 
@@ -322,7 +296,7 @@ whether the node is of the given type
 
 #### Defined in
 
-[src/parser/helpers.ts:28](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/helpers.ts#L28)
+[src/parser/helpers.ts:28](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/helpers.ts#L28)
 
 ***
 
@@ -360,7 +334,7 @@ If the node does not have the key
 
 #### Defined in
 
-[src/parser/helpers.ts:60](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/helpers.ts#L60)
+[src/parser/helpers.ts:57](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/helpers.ts#L57)
 
 ***
 
@@ -374,4 +348,4 @@ If the node does not have the key
 
 #### Defined in
 
-[src/parser/classes/NavigationEndpoint.ts:137](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/classes/NavigationEndpoint.ts#L137)
+[src/parser/classes/NavigationEndpoint.ts:116](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/classes/NavigationEndpoint.ts#L116)

@@ -1,24 +1,14 @@
 import * as YTNodes from './nodes.js';
 import { InnertubeError, ParsingError, Platform } from '../utils/Utils.js';
-import type { ObservedArray, YTNode, YTNodeConstructor } from './helpers.js';
 import { Memo, observe, SuperParsedResult } from './helpers.js';
-import type { KeyInfo } from './generator.js';
 import { camelToSnake, generateRuntimeClass, generateTypescriptClass } from './generator.js';
 import { Log } from '../utils/index.js';
 
 import {
-  Continuation,
-  ContinuationCommand,
-  GridContinuation,
-  ItemSectionContinuation,
-  LiveChatContinuation,
-  MusicPlaylistShelfContinuation,
-  MusicShelfContinuation,
-  NavigateAction,
-  PlaylistPanelContinuation,
-  ReloadContinuationItemsCommand,
-  SectionListContinuation,
-  ShowMiniplayerCommand
+  Continuation, ItemSectionContinuation, SectionListContinuation,
+  LiveChatContinuation, MusicPlaylistShelfContinuation, MusicShelfContinuation,
+  GridContinuation, PlaylistPanelContinuation, NavigateAction, ShowMiniplayerCommand,
+  ReloadContinuationItemsCommand, ContinuationCommand
 } from './continuations.js';
 
 import AudioOnlyPlayability from './classes/AudioOnlyPlayability.js';
@@ -37,6 +27,9 @@ import VideoDetails from './classes/misc/VideoDetails.js';
 import NavigationEndpoint from './classes/NavigationEndpoint.js';
 import CommentView from './classes/comments/CommentView.js';
 import MusicThumbnail from './classes/MusicThumbnail.js';
+
+import type { KeyInfo } from './generator.js';
+import type { ObservedArray, YTNodeConstructor, YTNode } from './helpers.js';
 import type { IParsedResponse, IRawResponse, RawData, RawNode } from './types/index.js';
 
 const TAG = 'Parser';
@@ -223,7 +216,7 @@ export function getDynamicParsers() {
 }
 
 /**
- * Parses a given InnerTube response.
+ * Parses given InnerTube response.
  * @param data - Raw data.
  */
 export function parseResponse<T extends IParsedResponse = IParsedResponse>(data: IRawResponse): T {
@@ -399,10 +392,10 @@ export function parseResponse<T extends IParsedResponse = IParsedResponse>(data:
     // Currently each response with streaming data only has two n param values
     // One for the adaptive formats and another for the combined formats
     // As they are the same for a response, we only need to decipher them once
-    // For all further deciphering calls on formats from that response, we can use the cached output, given the same input n param
+    // For all futher deciphering calls on formats from that response, we can use the cached output, given the same input n param
     const this_response_nsig_cache = new Map<string, string>();
 
-    parsed_data.streaming_data = {
+    const streaming_data = {
       expires: new Date(Date.now() + parseInt(data.streamingData.expiresInSeconds) * 1000),
       formats: parseFormats(data.streamingData.formats, this_response_nsig_cache),
       adaptive_formats: parseFormats(data.streamingData.adaptiveFormats, this_response_nsig_cache),
@@ -410,10 +403,12 @@ export function parseResponse<T extends IParsedResponse = IParsedResponse>(data:
       hls_manifest_url: data.streamingData.hlsManifestUrl,
       server_abr_streaming_url: data.streamingData.serverAbrStreamingUrl
     };
+
+    parsed_data.streaming_data = streaming_data;
   }
 
   if (data.playerConfig) {
-    parsed_data.player_config = {
+    const player_config = {
       audio_config: {
         loudness_db: data.playerConfig.audioConfig?.loudnessDb,
         perceptual_loudness_db: data.playerConfig.audioConfig?.perceptualLoudnessDb,
@@ -433,6 +428,8 @@ export function parseResponse<T extends IParsedResponse = IParsedResponse>(data:
         }
       }
     };
+
+    parsed_data.player_config = player_config;
   }
 
   const current_video_endpoint = data.currentVideoEndpoint ? new NavigationEndpoint(data.currentVideoEndpoint) : null;
@@ -481,18 +478,22 @@ export function parseResponse<T extends IParsedResponse = IParsedResponse>(data:
   }
 
   if (data.playerResponse) {
-    parsed_data.player_response = parseResponse(data.playerResponse);
+    const player_response = parseResponse(data.playerResponse);
+    parsed_data.player_response = player_response;
   }
 
   if (data.watchNextResponse) {
-    parsed_data.watch_next_response = parseResponse(data.watchNextResponse);
+    const watch_next_response = parseResponse(data.watchNextResponse);
+    parsed_data.watch_next_response = watch_next_response;
   }
 
   if (data.cpnInfo) {
-    parsed_data.cpn_info = {
+    const cpn_info = {
       cpn: data.cpnInfo.cpn,
       cpn_source: data.cpnInfo.cpnSource
     };
+
+    parsed_data.cpn_info = cpn_info;
   }
 
   if (data.entries) {
@@ -503,7 +504,7 @@ export function parseResponse<T extends IParsedResponse = IParsedResponse>(data:
 }
 
 /**
- * Parses an item.
+ * Parses a single item.
  * @param data - The data to parse.
  * @param validTypes - YTNode types that are allowed to be parsed.
  */
@@ -624,67 +625,6 @@ export function parse<T extends YTNode = YTNode>(data?: RawData, requireArray?: 
   }
 
   return new SuperParsedResult(parseItem(data, validTypes as YTNodeConstructor<T>));
-}
-
-const command_regexp = /Command$/;
-const endpoint_regexp = /Endpoint$/;
-const action_regexp = /Action$/;
-
-/**
- * Parses an InnerTube command and returns a YTNode instance if applicable.
- * @param data - The raw node data to parse
- * @returns A YTNode instance if parsing is successful, undefined otherwise
- */
-export function parseCommand(data: RawNode): YTNode | undefined {
-  let keys: string[] = [];
-
-  try {
-    keys = Object.keys(data);
-  } catch { /** NO-OP */ }
-
-  for (const key of keys) {
-    const value = data[key];
-    if (command_regexp.test(key) || endpoint_regexp.test(key) || action_regexp.test(key)) {
-      const classname = sanitizeClassName(key);
-
-      if (shouldIgnore(classname))
-        return undefined;
-
-      try {
-        const has_target_class = hasParser(classname);
-        if (has_target_class)
-          return new (getParserByName(classname))(value);
-      } catch (error) {
-        ERROR_HANDLER({
-          error,
-          classname,
-          classdata: value,
-          error_type: 'parse'
-        });
-      }
-    }
-  }
-}
-
-/**
- * Parses an array of InnerTube command nodes.
- * @param commands - Array of raw command nodes to parse
- * @returns An observed array of parsed YTNodes
- */
-export function parseCommands(commands?: RawNode[]): ObservedArray<YTNode> {
-  if (Array.isArray(commands)) {
-    const results: YTNode[] = [];
-
-    for (const item of commands) {
-      const result = parseCommand(item);
-      if (result) {
-        results.push(result);
-      }
-    }
-
-    return observe(results);
-  } else if (!commands) return observe([]);
-  throw new ParsingError('Expected array but got a single item');
 }
 
 export function parseC(data: RawNode) {

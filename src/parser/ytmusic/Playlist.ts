@@ -1,5 +1,3 @@
-// noinspection ES6MissingAwait
-
 import { Parser, MusicPlaylistShelfContinuation, SectionListContinuation } from '../index.js';
 
 import MusicCarouselShelf from '../classes/MusicCarouselShelf.js';
@@ -18,17 +16,16 @@ import type { IBrowseResponse } from '../types/index.js';
 import type MusicThumbnail from '../classes/MusicThumbnail.js';
 
 export default class Playlist {
-  readonly #page: IBrowseResponse;
-  readonly #actions: Actions;
-  readonly #continuation: string | null;
-
-  public header?: MusicResponsiveHeader | MusicDetailHeader | MusicEditablePlaylistDetailHeader;
-  public contents?: ObservedArray<MusicResponsiveListItem>;
-  public background?: MusicThumbnail;
-
+  #page: IBrowseResponse;
+  #actions: Actions;
+  #continuation: string | null;
   #last_fetched_suggestions: ObservedArray<MusicResponsiveListItem> | null;
   #suggestions_continuation: string | null;
-  
+
+  header?: MusicResponsiveHeader | MusicDetailHeader | MusicEditablePlaylistDetailHeader;
+  contents?: ObservedArray<MusicResponsiveListItem>;
+  background?: MusicThumbnail;
+
   constructor(response: ApiResponse, actions: Actions) {
     this.#actions = actions;
     this.#page = Parser.parseResponse<IBrowseResponse>(response.data);

@@ -5,7 +5,7 @@ import type Player from '../core/Player.js';
 import type Actions from '../core/Actions.js';
 import type Format from '../parser/classes/misc/Format.js';
 import type { IPlayabilityStatus, IStreamingData } from '../parser/index.js';
-import type { DownloadOptions, FormatOptions } from '../types/index.js';
+import type { DownloadOptions, FormatOptions } from '../types/FormatUtils.js';
 
 export async function download(
   options: DownloadOptions,
@@ -63,9 +63,8 @@ export async function download(
 
   let cancel: AbortController;
 
-  return new Platform.shim.ReadableStream<Uint8Array>({
-    start() {
-    },
+  const readable_stream = new Platform.shim.ReadableStream<Uint8Array>({
+    start() { },
     pull: async (controller) => {
       if (must_end) {
         controller.close();
@@ -92,18 +91,12 @@ export async function download(
 
           // Throw if the response is not 2xx
           if (!response.ok)
-            throw new InnertubeError('The server responded with a non 2xx status code', {
-              error_type: 'FETCH_FAILED',
-              response
-            });
+            throw new InnertubeError('The server responded with a non 2xx status code', { error_type: 'FETCH_FAILED', response });
 
           const body = response.body;
 
           if (!body)
-            throw new InnertubeError('Could not get ReadableStream from fetch Response.', {
-              error_type: 'FETCH_FAILED',
-              response
-            });
+            throw new InnertubeError('Could not get ReadableStream from fetch Response.', { error_type: 'FETCH_FAILED', response });
 
           for await (const chunk of streamToIterable(body)) {
             controller.enqueue(chunk);
@@ -128,6 +121,8 @@ export async function download(
       return chunk.byteLength;
     }
   });
+
+  return readable_stream;
 }
 
 /**

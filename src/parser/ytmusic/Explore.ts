@@ -12,10 +12,10 @@ import type { ObservedArray } from '../helpers.js';
 import type { IBrowseResponse } from '../types/index.js';
 
 export default class Explore {
-  readonly #page: IBrowseResponse;
+  #page: IBrowseResponse;
 
-  public top_buttons: MusicNavigationButton[];
-  public sections: ObservedArray<MusicCarouselShelf>;
+  top_buttons: MusicNavigationButton[];
+  sections: ObservedArray<MusicCarouselShelf>;
 
   constructor(response: ApiResponse) {
     this.#page = Parser.parseResponse<IBrowseResponse>(response.data);

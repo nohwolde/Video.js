@@ -1,4 +1,3 @@
-import type { IParsedResponse } from '../../parser/index.js';
 import { Parser, ReloadContinuationItemsCommand } from '../../parser/index.js';
 import { concatMemos, InnertubeError } from '../../utils/Utils.js';
 
@@ -28,19 +27,22 @@ import TwoColumnBrowseResults from '../../parser/classes/TwoColumnBrowseResults.
 import TwoColumnSearchResults from '../../parser/classes/TwoColumnSearchResults.js';
 import WatchCardCompactVideo from '../../parser/classes/WatchCardCompactVideo.js';
 
-import type { Actions, ApiResponse } from '../index.js';
-import type { Memo, ObservedArray, SuperParsedResult, YTNode } from '../../parser/helpers.js';
+import type { ApiResponse, Actions } from '../index.js';
+import type {
+  Memo, ObservedArray,
+  SuperParsedResult, YTNode
+} from '../../parser/helpers.js';
 import type MusicQueue from '../../parser/classes/MusicQueue.js';
 import type RichGrid from '../../parser/classes/RichGrid.js';
 import type SectionList from '../../parser/classes/SectionList.js';
+import type { IParsedResponse } from '../../parser/types/index.js';
 
 export default class Feed<T extends IParsedResponse = IParsedResponse> {
-  readonly #page: T;
-  readonly #actions: Actions;
-  readonly #memo: Memo;
-
+  #page: T;
   #continuation?: ObservedArray<ContinuationItem>;
-  
+  #actions: Actions;
+  #memo: Memo;
+
   constructor(actions: Actions, response: ApiResponse | IParsedResponse, already_parsed = false) {
     if (this.#isParsed(response) || already_parsed) {
       this.#page = response as T;
@@ -201,7 +203,9 @@ export default class Feed<T extends IParsedResponse = IParsedResponse> {
       if (this.#continuation.length === 0)
         throw new InnertubeError('There are no continuations.');
 
-      return await this.#continuation[0].endpoint.call<T>(this.#actions, { parse: true });
+      const response = await this.#continuation[0].endpoint.call<T>(this.#actions, { parse: true });
+
+      return response;
     }
 
     this.#continuation = this.#getBodyContinuations();

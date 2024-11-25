@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:28](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L28)
+[src/parser/ytmusic/Search.ts:29](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L29)
 
 ## Properties
 
@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:26](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L26)
+[src/parser/ytmusic/Search.ts:27](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L27)
 
 ***
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:25](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L25)
+[src/parser/ytmusic/Search.ts:26](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L26)
 
 ## Accessors
 
@@ -56,7 +56,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:137](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L137)
+[src/parser/ytmusic/Search.ts:138](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L138)
 
 ***
 
@@ -70,7 +70,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:141](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L141)
+[src/parser/ytmusic/Search.ts:142](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L142)
 
 ***
 
@@ -84,7 +84,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:117](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L117)
+[src/parser/ytmusic/Search.ts:118](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L118)
 
 ***
 
@@ -98,7 +98,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:109](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L109)
+[src/parser/ytmusic/Search.ts:110](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L110)
 
 ***
 
@@ -112,7 +112,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:113](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L113)
+[src/parser/ytmusic/Search.ts:114](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L114)
 
 ***
 
@@ -126,7 +126,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:125](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L125)
+[src/parser/ytmusic/Search.ts:126](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L126)
 
 ***
 
@@ -140,7 +140,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:149](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L149)
+[src/parser/ytmusic/Search.ts:164](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L164)
 
 ***
 
@@ -154,7 +154,43 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:145](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L145)
+[src/parser/ytmusic/Search.ts:146](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L146)
+
+***
+
+### results
+
+> `get` **results**(): `undefined` \| [`ObservedArray`](../../Helpers/type-aliases/ObservedArray.md)\<[`MusicResponsiveListItem`](../../YTNodes/classes/MusicResponsiveListItem.md)\>
+
+#### Deprecated
+
+Use [Search.contents](Search.md#contents) instead.
+
+#### Returns
+
+`undefined` \| [`ObservedArray`](../../Helpers/type-aliases/ObservedArray.md)\<[`MusicResponsiveListItem`](../../YTNodes/classes/MusicResponsiveListItem.md)\>
+
+#### Defined in
+
+[src/parser/ytmusic/Search.ts:153](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L153)
+
+***
+
+### sections
+
+> `get` **sections**(): `undefined` \| [`ObservedArray`](../../Helpers/type-aliases/ObservedArray.md)\<[`MusicShelf`](../../YTNodes/classes/MusicShelf.md)\>
+
+#### Deprecated
+
+Use [Search.contents](Search.md#contents) instead.
+
+#### Returns
+
+`undefined` \| [`ObservedArray`](../../Helpers/type-aliases/ObservedArray.md)\<[`MusicShelf`](../../YTNodes/classes/MusicShelf.md)\>
+
+#### Defined in
+
+[src/parser/ytmusic/Search.ts:160](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L160)
 
 ***
 
@@ -168,7 +204,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:121](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L121)
+[src/parser/ytmusic/Search.ts:122](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L122)
 
 ***
 
@@ -182,7 +218,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:129](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L129)
+[src/parser/ytmusic/Search.ts:130](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L130)
 
 ***
 
@@ -196,7 +232,7 @@
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:133](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L133)
+[src/parser/ytmusic/Search.ts:134](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L134)
 
 ## Methods
 
@@ -216,7 +252,7 @@ Applies given filter to the search.
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:86](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L86)
+[src/parser/ytmusic/Search.ts:87](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L87)
 
 ***
 
@@ -232,7 +268,7 @@ Retrieves search continuation. Only available for filtered searches and shelf co
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:71](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L71)
+[src/parser/ytmusic/Search.ts:72](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L72)
 
 ***
 
@@ -252,4 +288,4 @@ Loads more items for the given shelf.
 
 #### Defined in
 
-[src/parser/ytmusic/Search.ts:56](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/ytmusic/Search.ts#L56)
+[src/parser/ytmusic/Search.ts:57](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/ytmusic/Search.ts#L57)

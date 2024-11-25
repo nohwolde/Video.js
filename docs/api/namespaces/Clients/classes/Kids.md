@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[src/core/clients/Kids.ts:12](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/clients/Kids.ts#L12)
+[src/core/clients/Kids.ts:18](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/clients/Kids.ts#L18)
 
 ## Methods
 
@@ -43,7 +43,7 @@ A list of API responses.
 
 #### Defined in
 
-[src/core/clients/Kids.ts:65](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/clients/Kids.ts#L65)
+[src/core/clients/Kids.ts:91](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/clients/Kids.ts#L91)
 
 ***
 
@@ -51,9 +51,13 @@ A list of API responses.
 
 > **getChannel**(`channel_id`): `Promise`\<[`Channel`](../../YTKids/classes/Channel.md)\>
 
+Retrieves the contents of the given channel.
+
 #### Parameters
 
 • **channel\_id**: `string`
+
+The channel id.
 
 #### Returns
 
@@ -61,7 +65,7 @@ A list of API responses.
 
 #### Defined in
 
-[src/core/clients/Kids.ts:47](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/clients/Kids.ts#L47)
+[src/core/clients/Kids.ts:62](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/clients/Kids.ts#L62)
 
 ***
 
@@ -69,13 +73,15 @@ A list of API responses.
 
 > **getHomeFeed**(): `Promise`\<[`HomeFeed`](../../YTKids/classes/HomeFeed.md)\>
 
+Retrieves the home feed.
+
 #### Returns
 
 `Promise`\<[`HomeFeed`](../../YTKids/classes/HomeFeed.md)\>
 
 #### Defined in
 
-[src/core/clients/Kids.ts:53](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/clients/Kids.ts#L53)
+[src/core/clients/Kids.ts:75](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/clients/Kids.ts#L75)
 
 ***
 
@@ -83,9 +89,13 @@ A list of API responses.
 
 > **getInfo**(`video_id`): `Promise`\<[`VideoInfo`](../../YTKids/classes/VideoInfo.md)\>
 
+Retrieves video info.
+
 #### Parameters
 
 • **video\_id**: `string`
+
+The video id.
 
 #### Returns
 
@@ -93,7 +103,7 @@ A list of API responses.
 
 #### Defined in
 
-[src/core/clients/Kids.ts:22](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/clients/Kids.ts#L22)
+[src/core/clients/Kids.ts:37](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/clients/Kids.ts#L37)
 
 ***
 
@@ -101,9 +111,13 @@ A list of API responses.
 
 > **search**(`query`): `Promise`\<[`Search`](../../YTKids/classes/Search.md)\>
 
+Searches the given query.
+
 #### Parameters
 
 • **query**: `string`
+
+The query.
 
 #### Returns
 
@@ -111,4 +125,4 @@ A list of API responses.
 
 #### Defined in
 
-[src/core/clients/Kids.ts:16](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/core/clients/Kids.ts#L16)
+[src/core/clients/Kids.ts:26](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/core/clients/Kids.ts#L26)

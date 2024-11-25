@@ -17,8 +17,8 @@ export interface HTTPClientInit {
 
 export default class HTTPClient {
   #session: Session;
-  readonly #cookie?: string;
-  readonly #fetch: FetchFunction;
+  #cookie?: string;
+  #fetch: FetchFunction;
 
   constructor(session: Session, cookie?: string, fetch?: FetchFunction) {
     this.#session = session;
@@ -90,7 +90,7 @@ export default class HTTPClient {
 
       const n_body = {
         ...json,
-        // Deep copy since we're going to be modifying it
+        // Deep copy since we're gonna be modifying it
         context: JSON.parse(JSON.stringify(this.#session.context)) as Context
       };
 
@@ -217,12 +217,6 @@ export default class HTTPClient {
         ctx.client.clientFormFactor = 'SMALL_FORM_FACTOR';
         ctx.client.clientName = Constants.CLIENTS.YTSTUDIO_ANDROID.NAME;
         break;
-      case 'TV': {
-        ctx.client.clientVersion = Constants.CLIENTS.TV.VERSION;
-        ctx.client.clientName = Constants.CLIENTS.TV.NAME;
-        ctx.client.userAgent = Constants.CLIENTS.TV.USER_AGENT;
-        break;
-      }
       case 'TV_EMBEDDED':
         ctx.client.clientName = Constants.CLIENTS.TV_EMBEDDED.NAME;
         ctx.client.clientVersion = Constants.CLIENTS.TV_EMBEDDED.VERSION;

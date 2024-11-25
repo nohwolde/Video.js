@@ -1,16 +1,63 @@
-import type { Actions } from '../index.js';
+import type { Actions, ApiResponse } from '../index.js';
 
 import AccountInfo from '../../parser/youtube/AccountInfo.js';
+import Analytics from '../../parser/youtube/Analytics.js';
 import Settings from '../../parser/youtube/Settings.js';
-import NavigationEndpoint from '../../parser/classes/NavigationEndpoint.js';
+import TimeWatched from '../../parser/youtube/TimeWatched.js';
 
-import { InnertubeError } from '../../utils/Utils.js';
+import { InnertubeError, u8ToBase64 } from '../../utils/Utils.js';
+import { Account, BrowseEndpoint, Channel } from '../endpoints/index.js';
+
+import { ChannelAnalytics } from '../../../protos/generated/misc/params.js';
 
 export default class AccountManager {
-  readonly #actions: Actions;
+  #actions: Actions;
+
+  channel: {
+    editName: (new_name: string) => Promise<ApiResponse>;
+    editDescription: (new_description: string) => Promise<ApiResponse>;
+    getBasicAnalytics: () => Promise<Analytics>;
+  };
 
   constructor(actions: Actions) {
     this.#actions = actions;
+
+    this.channel = {
+      /**
+       * Edits channel name.
+       * @param new_name - The new channel name.
+       */
+      editName: (new_name: string) => {
+        if (!this.#actions.session.logged_in)
+          throw new InnertubeError('You must be signed in to perform this operation.');
+
+        return this.#actions.execute(
+          Channel.EditNameEndpoint.PATH,
+          Channel.EditNameEndpoint.build({
+            given_name: new_name
+          })
+        );
+      },
+      /**
+       * Edits channel description.
+       * @param new_description - The new description.
+       */
+      editDescription: (new_description: string) => {
+        if (!this.#actions.session.logged_in)
+          throw new InnertubeError('You must be signed in to perform this operation.');
+
+        return this.#actions.execute(
+          Channel.EditDescriptionEndpoint.PATH,
+          Channel.EditDescriptionEndpoint.build({
+            given_description: new_description
+          })
+        );
+      },
+      /**
+       * Retrieves basic channel analytics.
+       */
+      getBasicAnalytics: () => this.getAnalytics()
+    };
   }
 
   /**
@@ -19,17 +66,63 @@ export default class AccountManager {
   async getInfo(): Promise<AccountInfo> {
     if (!this.#actions.session.logged_in)
       throw new InnertubeError('You must be signed in to perform this operation.');
-    const get_accounts_list_endpoint = new NavigationEndpoint({ getAccountsListInnertubeEndpoint: {} });
-    const response = await get_accounts_list_endpoint.call(this.#actions, { client: 'TV' });
+
+    const response = await this.#actions.execute(
+      Account.AccountListEndpoint.PATH,
+      Account.AccountListEndpoint.build()
+    );
+
     return new AccountInfo(response);
   }
 
   /**
-   * Gets YouTube settings.
+   * Retrieves time watched statistics.
+   */
+  async getTimeWatched(): Promise<TimeWatched> {
+    const response = await this.#actions.execute(
+      BrowseEndpoint.PATH, BrowseEndpoint.build({
+        browse_id: 'SPtime_watched',
+        client: 'ANDROID'
+      })
+    );
+
+    return new TimeWatched(response);
+  }
+
+  /**
+   * Opens YouTube settings.
    */
   async getSettings(): Promise<Settings> {
-    const browse_endpoint = new NavigationEndpoint({ browseEndpoint: { browseId: 'SPaccount_overview' } });
-    const response = await browse_endpoint.call(this.#actions);
+    const response = await this.#actions.execute(
+      BrowseEndpoint.PATH, BrowseEndpoint.build({
+        browse_id: 'SPaccount_overview'
+      })
+    );
     return new Settings(this.#actions, response);
+  }
+
+  /**
+   * Retrieves basic channel analytics.
+   */
+  async getAnalytics(): Promise<Analytics> {
+    const info = await this.getInfo();
+
+    const writer = ChannelAnalytics.encode({
+      params: {
+        channelId: info.footers?.endpoint.payload.browseId
+      }
+    });
+
+    const params = encodeURIComponent(u8ToBase64(writer.finish()));
+
+    const response = await this.#actions.execute(
+      BrowseEndpoint.PATH, BrowseEndpoint.build({
+        browse_id: 'FEanalytics_screen',
+        client: 'ANDROID',
+        params
+      })
+    );
+
+    return new Analytics(response);
   }
 }

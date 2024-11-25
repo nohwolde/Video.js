@@ -4,7 +4,7 @@
 
 > **inferType**(`key`, `value`): [`InferenceType`](../type-aliases/InferenceType.md)
 
-Infer the type of key given its value
+Infer the type of a key given its value
 
 ## Parameters
 
@@ -24,4 +24,4 @@ The inferred type
 
 ## Defined in
 
-[src/parser/generator.ts:92](https://github.com/LuanRT/YouTube.js/blob/cf09f7bab14fcca99e1f3ae428c7337fea58cfa5/src/parser/generator.ts#L92)
+[src/parser/generator.ts:90](https://github.com/LuanRT/YouTube.js/blob/eb21af33db708f0355f4fb15881f5d4fabc7b06c/src/parser/generator.ts#L90)

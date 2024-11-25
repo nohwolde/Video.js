@@ -18,12 +18,12 @@ import type { ApiResponse, Actions } from '../../core/index.js';
 import type { IBrowseResponse } from '../types/index.js';
 
 export default class Settings {
-  readonly #page: IBrowseResponse;
-  readonly #actions: Actions;
+  #page: IBrowseResponse;
+  #actions: Actions;
 
-  public sidebar?: SettingsSidebar;
-  public introduction?: PageIntroduction;
-  public sections;
+  sidebar?: SettingsSidebar;
+  introduction?: PageIntroduction;
+  sections;
 
   constructor(actions: Actions, response: ApiResponse) {
     this.#actions = actions;

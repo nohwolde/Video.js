@@ -1,48 +1,49 @@
-const YTJS_TAG = 'YOUTUBEJS';
+export default class Log {
+  private static YTJS_TAG = 'YOUTUBEJS';
 
-export const Level = {
-  NONE: 0,
-  ERROR: 1,
-  WARNING: 2,
-  INFO: 3,
-  DEBUG: 4
-};
+  public static Level = {
+    NONE: 0,
+    ERROR: 1,
+    WARNING: 2,
+    INFO: 3,
+    DEBUG: 4
+  };
 
-const log_map = {
-  [Level.ERROR]: (...args: any[]) => console.error(...args),
-  [Level.WARNING]: (...args: any[]) => console.warn(...args),
-  [Level.INFO]: (...args: any[]) => console.info(...args),
-  [Level.DEBUG]: (...args: any[]) => console.debug(...args)
-};
+  private static log_map_ = {
+    [Log.Level.ERROR]: (...args: any[]) => console.error(...args),
+    [Log.Level.WARNING]: (...args: any[]) => console.warn(...args),
+    [Log.Level.INFO]: (...args: any[]) => console.info(...args),
+    [Log.Level.DEBUG]: (...args: any[]) => console.debug(...args)
+  };
 
-let log_level = [ Level.WARNING ];
-const one_time_warnings_issued = new Set<string>();
+  private static log_level_ = [ Log.Level.WARNING ];
+  private static one_time_warnings_issued_ = new Set<string>();
 
-function doLog(level: number, tag?: string, args?: any[]) {
-  if (!log_map[level] || !log_level.includes(level))
-    return;
+  static warnOnce = (id: string, ...args: any[]) => {
+    if (this.one_time_warnings_issued_.has(id))
+      return;
+    this.doLog(Log.Level.WARNING, id, args);
+    this.one_time_warnings_issued_.add(id);
+  };
 
-  const tags = [ `[${YTJS_TAG}]` ];
+  static warn = (tag?: string, ...args: any[]) => this.doLog(Log.Level.WARNING, tag, args);
+  static error = (tag?: string, ...args: any[]) => this.doLog(Log.Level.ERROR, tag, args);
+  static info = (tag?: string, ...args: any[]) => this.doLog(Log.Level.INFO, tag, args);
+  static debug = (tag?: string, ...args: any[]) => this.doLog(Log.Level.DEBUG, tag, args);
 
-  if (tag)
-    tags.push(`[${tag}]`);
+  private static doLog(level: number, tag?: string, args?: any[]) {
+    if (!this.log_map_[level] || !this.log_level_.includes(level))
+      return;
 
-  log_map[level](`${tags.join('')}:`, ...(args || []));
-}
+    const tags = [ `[${this.YTJS_TAG}]` ];
 
-export const warnOnce = (id: string, ...args: any[]) => {
-  if (one_time_warnings_issued.has(id))
-    return;
-  
-  doLog(Level.WARNING, id, args);
-  one_time_warnings_issued.add(id);
-};
+    if (tag)
+      tags.push(`[${tag}]`);
 
-export const warn = (tag?: string, ...args: any[]) => doLog(Level.WARNING, tag, args);
-export const error = (tag?: string, ...args: any[]) => doLog(Level.ERROR, tag, args);
-export const info = (tag?: string, ...args: any[]) => doLog(Level.INFO, tag, args);
-export const debug = (tag?: string, ...args: any[]) => doLog(Level.DEBUG, tag, args);
+    this.log_map_[level](`${tags.join('')}:`, ...(args || []));
+  }
 
-export function setLevel(...args: number[]) {
-  log_level = args;
+  static setLevel(...args: number[]) {
+    this.log_level_ = args;
+  }
 }

@@ -1,11 +1,17 @@
 import * as ProtoUtils from '../../utils/ProtoUtils.js';
+
 import { throwIfMissing, u8ToBase64 } from '../../utils/Utils.js';
+import { LikeEndpoint, DislikeEndpoint, RemoveLikeEndpoint } from '../endpoints/like/index.js';
+import { SubscribeEndpoint, UnsubscribeEndpoint } from '../endpoints/subscription/index.js';
+import { CreateCommentEndpoint, PerformCommentActionEndpoint } from '../endpoints/comment/index.js';
+import { ModifyChannelPreferenceEndpoint } from '../endpoints/notification/index.js';
+
 import { CreateCommentParams, NotificationPreferences } from '../../../protos/generated/misc/params.js';
+
 import type { Actions, ApiResponse } from '../index.js';
-import NavigationEndpoint from '../../parser/classes/NavigationEndpoint.js';
 
 export default class InteractionManager {
-  readonly #actions: Actions;
+  #actions: Actions;
 
   constructor(actions: Actions) {
     this.#actions = actions;
@@ -21,14 +27,14 @@ export default class InteractionManager {
     if (!this.#actions.session.logged_in)
       throw new Error('You must be signed in to perform this operation.');
 
-    const like_endpoint = new NavigationEndpoint({
-      likeEndpoint: {
-        status: 'LIKE',
-        target: video_id
-      }
-    });
+    const action = await this.#actions.execute(
+      LikeEndpoint.PATH, LikeEndpoint.build({
+        client: 'ANDROID',
+        target: { video_id }
+      })
+    );
 
-    return like_endpoint.call(this.#actions, { client: 'TV' });
+    return action;
   }
 
   /**
@@ -41,14 +47,14 @@ export default class InteractionManager {
     if (!this.#actions.session.logged_in)
       throw new Error('You must be signed in to perform this operation.');
 
-    const dislike_endpoint = new NavigationEndpoint({
-      likeEndpoint: {
-        status: 'DISLIKE',
-        target: video_id
-      }
-    });
+    const action = await this.#actions.execute(
+      DislikeEndpoint.PATH, DislikeEndpoint.build({
+        client: 'ANDROID',
+        target: { video_id }
+      })
+    );
 
-    return dislike_endpoint.call(this.#actions, { client: 'TV' });
+    return action;
   }
 
   /**
@@ -61,18 +67,18 @@ export default class InteractionManager {
     if (!this.#actions.session.logged_in)
       throw new Error('You must be signed in to perform this operation.');
 
-    const remove_like_endpoint = new NavigationEndpoint({
-      likeEndpoint: {
-        status: 'INDIFFERENT',
-        target: video_id
-      }
-    });
+    const action = await this.#actions.execute(
+      RemoveLikeEndpoint.PATH, RemoveLikeEndpoint.build({
+        client: 'ANDROID',
+        target: { video_id }
+      })
+    );
 
-    return remove_like_endpoint.call(this.#actions, { client: 'TV' });
+    return action;
   }
 
   /**
-   * Subscribes to the given channel.
+   * Subscribes to a given channel.
    * @param channel_id - The channel ID
    */
   async subscribe(channel_id: string): Promise<ApiResponse> {
@@ -81,18 +87,19 @@ export default class InteractionManager {
     if (!this.#actions.session.logged_in)
       throw new Error('You must be signed in to perform this operation.');
 
-    const subscribe_endpoint = new NavigationEndpoint({
-      subscribeEndpoint: {
-        channelIds: [ channel_id ],
+    const action = await this.#actions.execute(
+      SubscribeEndpoint.PATH, SubscribeEndpoint.build({
+        client: 'ANDROID',
+        channel_ids: [ channel_id ],
         params: 'EgIIAhgA'
-      }
-    });
+      })
+    );
 
-    return subscribe_endpoint.call(this.#actions);
+    return action;
   }
 
   /**
-   * Unsubscribes from the given channel.
+   * Unsubscribes from a given channel.
    * @param channel_id - The channel ID
    */
   async unsubscribe(channel_id: string): Promise<ApiResponse> {
@@ -101,14 +108,15 @@ export default class InteractionManager {
     if (!this.#actions.session.logged_in)
       throw new Error('You must be signed in to perform this operation.');
 
-    const unsubscribe_endpoint = new NavigationEndpoint({
-      unsubscribeEndpoint: {
-        channelIds: [ channel_id ],
+    const action = await this.#actions.execute(
+      UnsubscribeEndpoint.PATH, UnsubscribeEndpoint.build({
+        client: 'ANDROID',
+        channel_ids: [ channel_id ],
         params: 'CgIIAhgA'
-      }
-    });
+      })
+    );
 
-    return unsubscribe_endpoint.call(this.#actions);
+    return action;
   }
 
   /**
@@ -132,29 +140,35 @@ export default class InteractionManager {
 
     const params = encodeURIComponent(u8ToBase64(writer.finish()));
 
-    const create_comment_endpoint = new NavigationEndpoint({
-      createCommentEndpoint: {
-        commentText: text,
-        createCommentParams: params
-      }
-    });
+    const action = await this.#actions.execute(
+      CreateCommentEndpoint.PATH, CreateCommentEndpoint.build({
+        comment_text: text,
+        create_comment_params: params,
+        client: 'ANDROID'
+      })
+    );
 
-    return create_comment_endpoint.call(this.#actions);
+    return action;
   }
 
   /**
-   * Translates a given text using YouTube's comment translation feature.
-   * @param text - The text to translate
+   * Translates a given text using YouTube's comment translate feature.
+   *
    * @param target_language - an ISO language code
    * @param args - optional arguments
    */
   async translate(text: string, target_language: string, args: { video_id?: string; comment_id?: string; } = {}) {
     throwIfMissing({ text, target_language });
 
-    const action = ProtoUtils.encodeCommentActionParams(22, { text, target_language, ...args });
+    const target_action = ProtoUtils.encodeCommentActionParams(22, { text, target_language, ...args });
 
-    const perform_comment_action_endpoint = new NavigationEndpoint({ performCommentActionEndpoint: { action } });
-    const response = await perform_comment_action_endpoint.call(this.#actions);
+    const response = await this.#actions.execute(
+      PerformCommentActionEndpoint.PATH, PerformCommentActionEndpoint.build({
+        client: 'ANDROID',
+        actions: [ target_action ]
+      })
+    );
+
     const mutation = response.data.frameworkUpdates.entityBatchUpdate.mutations[0].payload.commentEntityPayload;
 
     return {
@@ -195,8 +209,14 @@ export default class InteractionManager {
     });
 
     const params = encodeURIComponent(u8ToBase64(writer.finish()));
+  
+    const action = await this.#actions.execute(
+      ModifyChannelPreferenceEndpoint.PATH, ModifyChannelPreferenceEndpoint.build({
+        client: 'WEB',
+        params
+      })
+    );
 
-    const modify_channel_notification_preference_endpoint = new NavigationEndpoint({ modifyChannelNotificationPreferenceEndpoint: { params } });
-    return modify_channel_notification_preference_endpoint.call(this.#actions);
+    return action;
   }
 }
